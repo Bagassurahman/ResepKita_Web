@@ -116,6 +116,54 @@ class PermissionsTableSeeder extends Seeder
                 'id'    => 27,
                 'title' => 'profile_password_edit',
             ],
+            [
+                'id'    => 28,
+                'title' => 'resep_create',
+            ],
+            [
+                'id'    => 29,
+                'title' => 'resep_edit',
+            ],
+            [
+                'id'    => 30,
+                'title' => 'resep_show',
+            ],
+            [
+                'id'    => 31,
+                'title' => 'resep_delete',
+            ],
+            [
+                'id'    => 32,
+                'title' => 'resep_access',
+            ],
+            [
+                'id'    => 33,
+                'title' => 'kategori_create',
+            ],
+            [
+                'id'    => 34,
+                'title' => 'kategori_edit',
+            ],
+            [
+                'id'    => 35,
+                'title' => 'kategori_show',
+            ],
+            [
+                'id'    => 36,
+                'title' => 'kategori_delete',
+            ],
+            [
+                'id'    => 37,
+                'title' => 'kategori_access',
+            ],
+            [
+                'id'    => 38,
+                'title' => 'kategoridropdown_access',
+            ],
+            [
+                'id'    => 39,
+                'title' => 'gambarkategori_access',
+            ],
         ];
 
         Permission::insert($permissions);

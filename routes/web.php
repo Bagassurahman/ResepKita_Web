@@ -1,6 +1,8 @@
 <?php
+use Illuminate\Support\Facades\Route;
 
-Route::redirect('/', '/login');
+// Route::redirect('/', '/login');
+Route::get('/', 'LandingController@index');
 Route::get('/home', function () {
     if (session('status')) {
         return redirect()->route('admin.home')->with('status', session('status'));
@@ -9,7 +11,7 @@ Route::get('/home', function () {
     return redirect()->route('admin.home');
 });
 
-Auth::routes(['register' => false]);
+Auth::routes();
 // Admin
 
 Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'middleware' => ['auth']], function () {
@@ -35,6 +37,15 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
     Route::post('folders/media', 'FoldersController@storeMedia')->name('folders.storeMedia');
     Route::post('folders/ckmedia', 'FoldersController@storeCKEditorImages')->name('folders.storeCKEditorImages');
     Route::resource('folders', 'FoldersController');
+
+    // Resep
+    // Route::get('resep','ResepsController@index');
+    Route::delete('reseps/destroy', 'ResepsController@massDestroy')->name('reseps.massDestroy');
+    Route::resource('reseps', 'ResepsController');
+
+    // Kategori
+    Route::delete('kategories/destroy', 'KategoriesController@massDestroy')->name('kategories.massDestroy');
+    Route::resource('kategories', 'KategoriesController');
 });
 Route::group(['prefix' => 'profile', 'as' => 'profile.', 'namespace' => 'Auth', 'middleware' => ['auth']], function () {
 // Change password

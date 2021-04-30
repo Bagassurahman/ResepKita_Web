@@ -43,7 +43,7 @@ class FoldersController extends Controller
         $folder = Folder::create($request->all());
 
         foreach ($request->input('files', []) as $file) {
-            $folder->addMedia(storage_path('tmp/uploads/' . $file))->toMediaCollection('files');
+            $folder->addMedia(public_path('tmp/uploads/' . $file))->toMediaCollection('files');
         }
 
         if ($media = $request->input('ck-media', false)) {

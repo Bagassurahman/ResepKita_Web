@@ -1,6 +1,7 @@
 @extends('layouts.admin')
 @section('content')
 <div class="main-card">
+
     <div class="header">
         Dashboard
     </div>
@@ -13,6 +14,7 @@
         @endif
 
         You are logged in!
+
     </div>
 </div>
 @endsection

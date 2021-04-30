@@ -3,7 +3,10 @@
 <div id="sidebar" class="sidebar-menu transform -translate-x-full ease-in">
     <div class="flex items-center justify-center mt-4">
         <div class="flex items-center">
-            <span class="text-white text-2xl mx-2 font-semibold">{{ trans('panel.site_title') }}</span>
+            {{-- <span class="text-white text-2xl mx-2 font-semibold">{{ trans('panel.site_title') }}</span> --}}
+            <a href="{{ url('/') }}">
+                <img class="img-fluid" src="{{asset('img/logo.png')}}" alt="">
+            </a>
         </div>
     </div>
     <nav class="mt-4">
@@ -53,6 +56,47 @@
                             <span class="mx-4">{{ trans('cruds.user.title') }}</span>
                         </a>
                     @endcan
+                </div>
+            </div>
+        @endcan
+        @can('resep_access')
+            <a class="nav-link{{ request()->is('admin/resep*') ? ' active' : '' }}" href="{{ route('admin.reseps.index') }}">
+                <i class="fa-fw fas fa-utensils">
+
+                </i>
+
+                <span class="mx-4">{{ trans('cruds.resep.title') }}</span>
+            </a>
+        @endcan
+        @can('kategoridropdown_access')
+            <div class="nav-dropdown">
+                <a class="nav-link" href="#">
+                    <i class="fa-fw fab fa-slack">
+
+                    </i>
+
+                    <span class="mx-4">{{ trans('cruds.kategori.title') }}</span>
+                    <i class="fa fa-caret-down ml-auto" aria-hidden="true"></i>
+                </a>
+                <div class="dropdown-items mb-1 hidden">
+                    @can('kategori_access')
+                        <a class="nav-link{{ request()->is('admin/kategories*') ? ' active' : '' }}" href="{{ route('admin.kategories.index') }}">
+                            <i class="fa-fw fas fa-hashtag">
+
+                            </i>
+
+                            <span class="mx-4">{{ trans('cruds.kategori.title') }}</span>
+                        </a>
+                    @endcan
+                    {{-- @can('gambarkategori_access')
+                        <a class="nav-link{{ request()->is('admin/gambarkategories*') ? ' active' : '' }}" href="{{ route('admin.gambarkategories.index') }}">
+                            <i class="fa-fw far fa-images">
+
+                            </i>
+
+                            <span class="mx-4">{{ trans('cruds.kategori.gambarkategori') }}</span>
+                        </a>
+                    @endcan --}}
                 </div>
             </div>
         @endcan
