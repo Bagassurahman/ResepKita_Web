@@ -185,7 +185,7 @@
                     <h2 class="title-bottom" data-aos="fade-up" data-aos-easing="linear" data-aos-duration="300">Resep Favorit</h2>
                 </div>
                   <div class="row pt-3">
-                    @foreach ($reseps as $key => $resep)
+                    @foreach ($reseps->take(6) as $key => $resep)
                       <div class="col-lg-4 col-md col-sm">
 
                         <div class="card mt-2 mx-auto" style="width: 18rem;" data-aos="fade-up" data-aos-easing="linear" data-aos-duration="300">
