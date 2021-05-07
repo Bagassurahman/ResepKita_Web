@@ -21,12 +21,12 @@ class LandingController extends Controller
     }
     public function resep()
     {
-        $kategori = Kategori::limit(4)->get();
+        // $kategori = Kategori::limit(4)->get();
         $reseps = Resep::paginate(4);
         $paginate = Paginator::useBootstrap();
 
         // $kategori_resep = DB::table('kategori_resep')->get();
-        return view('landing.resep', compact('kategori', 'reseps', 'paginate'));
+        return view('landing.resep', compact('reseps', 'paginate'));
     }
     public function show(Resep $resep,Ulasan $ulasan, $id){
         $resep = Resep::find($id);
