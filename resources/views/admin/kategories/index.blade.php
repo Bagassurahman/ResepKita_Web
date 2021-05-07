@@ -53,13 +53,13 @@
                                 {{ $kategori->nama_kategori ?? '' }}
                             </td>
                             <td>
-                                <img class="img-fluid" src="{{ asset('images/'.$kategori->gambar) }}" height="100" width="150">
+                                <img class="img-fluid" src="{{ asset('images/'.$kategori->gambar_sampul) }}" height="100" width="150">
                             </td>
                             <td>
                                 {{ $kategori->slug ?? '' }}
                             </td>
                             <td>
-                                {{ $kategori->keterangan ?? '' }}
+                                {!! Str::limit($kategori->keterangan, 10) !!}
                             </td>
                             <td>
                                 @can('kategori_show')

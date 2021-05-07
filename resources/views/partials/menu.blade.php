@@ -100,6 +100,15 @@
                 </div>
             </div>
         @endcan
+        @can('contact_access')
+            <a class="nav-link{{ request()->is('admin/contact*') ? ' active' : '' }}" href="{{ route('admin.contacts.index') }}">
+                <i class="fa-fw fas fa-id-card">
+
+                </i>
+
+                <span class="mx-4">Contacts</span>
+            </a>
+        @endcan
         @can('project_access')
             <a class="nav-link{{ request()->is('admin/projects*') ? ' active' : '' }}" href="{{ route('admin.projects.index') }}">
                 <i class="fa-fw fas fa-project-diagram">

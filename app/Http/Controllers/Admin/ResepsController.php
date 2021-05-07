@@ -8,11 +8,13 @@ use App\Http\Requests\StoreResepRequest;
 use App\Http\Requests\UpdateResepRequest;
 use App\Resep;
 use App\User;
+use App\Role;
 use App\Kategori;
 use Gate;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Illuminate\Support\Facades\Auth;
 
 class ResepsController extends Controller
 {
@@ -24,10 +26,13 @@ class ResepsController extends Controller
         // ->leftjoin('users','resep.user_id','=','users.id')
         // ->select('users.name','resep.*')
         // ->paginate(5);
-        $reseps = Resep::all();
+        $name = Auth::user()->name;
+        $data_resep = Resep::all();
         $users = User::all()->pluck('name', 'id');
 
-        return view('admin.reseps.index', compact('reseps', 'users'));
+        $reseps = Resep::where('name', '=', $name)->get();
+
+        return view('admin.reseps.index', compact('reseps', 'users', 'data_resep'));
     }
 
     public function create()
@@ -55,6 +60,7 @@ class ResepsController extends Controller
         $resep = Resep::create([
             "nama_resep"=>$request->input("nama_resep"),
             "name"=>$request->input("name"),
+            "description"=>$request->input("description"),
             "alat_bahan"=>$request->input("alat_bahan"),
             "step"=>$request->input("step"),
             "gambar"=>$imgName,
@@ -92,6 +98,7 @@ class ResepsController extends Controller
 
         $resep->nama_resep = $request->input("nama_resep");
         $resep->name = $request->input("name");
+        $resep->description = $request->input("description");
         $resep->alat_bahan = $request->input("alat_bahan");
         $resep->step = $request->input("step");
 

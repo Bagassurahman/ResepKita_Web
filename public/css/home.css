@@ -1,7 +1,7 @@
 .jumbotron .desc h2{
     font-style: normal;
     font-weight: 900;
-    font-size: 60px;
+    font-size: 56px;
     line-height: 80px;
 
     /* primary */
@@ -11,7 +11,12 @@
 .jumbotron{
     background: none;
 }
-
+.jumbotron .desc .sosmed i{
+    font-size: 16px;
+    padding: 10px 10px;
+    background: #F2F6F7;
+    box-shadow: -5px 10px 20px rgba(0, 0, 0, 0.25);
+}
 
 #about .desc h3{
     font-style: normal;

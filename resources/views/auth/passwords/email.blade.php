@@ -23,7 +23,7 @@
         </label>
 
         <div class="mt-6">
-            <button type="submit" class="button">
+            <button type="submit" class="button" style="background: #FD8F13;">
                 {{ trans('global.send_password') }}
             </button>
         </div>

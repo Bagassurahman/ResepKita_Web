@@ -164,6 +164,34 @@ class PermissionsTableSeeder extends Seeder
                 'id'    => 39,
                 'title' => 'gambarkategori_access',
             ],
+            [
+                'id'    => 40,
+                'title' => 'contact_create',
+            ],
+            [
+                'id'    => 41,
+                'title' => 'contact_edit',
+            ],
+            [
+                'id'    => 42,
+                'title' => 'contact_show',
+            ],
+            [
+                'id'    => 43,
+                'title' => 'contact_delete',
+            ],
+            [
+                'id'    => 44,
+                'title' => 'contact_access',
+            ],
+            [
+                'id'    => 45,
+                'title' => 'resep_admin_access',
+            ],
+            [
+                'id'    => 46,
+                'title' => 'resep_user_access',
+            ],
         ];
 
         Permission::insert($permissions);

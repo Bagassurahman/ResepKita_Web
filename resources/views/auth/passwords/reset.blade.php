@@ -37,7 +37,7 @@
         </label>
 
         <div class="mt-6">
-            <button type="submit" class="button">
+            <button type="submit" class="button" style="background: #FD8F13;">
                 {{ trans('global.reset_password') }}
             </button>
         </div>

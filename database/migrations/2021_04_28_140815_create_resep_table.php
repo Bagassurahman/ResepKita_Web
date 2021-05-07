@@ -18,8 +18,8 @@ class CreateResepTable extends Migration
             $table->string('nama_resep',255);
             $table->string('name',255);
             $table->string('gambar',255);
-            $table->string('alat_bahan',255);
-            $table->string('step',255);
+            $table->longText('alat_bahan');
+            $table->longText('step');
             // $table->unsignedInteger('kategori_id');
             // $table->foreign('kategori_id')->references('id')->on('kategori')->onDelete('cascade');
             // $table->string('kategori_id',50, NULL);

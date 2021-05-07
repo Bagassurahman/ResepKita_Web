@@ -30,6 +30,9 @@
                             {{ trans('cruds.resep.fields.nama_resep') }}
                         </th>
                         <th>
+                            Description
+                        </th>
+                        <th>
                             {{ trans('cruds.resep.fields.gambar') }}
                         </th>
                         <th>
@@ -47,64 +50,134 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach($reseps as $key => $resep)
-                        <tr data-entry-id="{{ $resep->id }}">
-                            <td>
+                    @can('resep_user_access')
+                        @foreach($reseps as $key => $resep)
+                            <tr data-entry-id="{{ $resep->id }}">
+                                <td>
 
-                            </td>
-                            <td>
-                                {{ $resep->id ?? '' }}
-                            </td>
-                            <td>
-                                {{-- @foreach($resep->users as $key => $item)
-                                    {{ $item->name }}
-                                @endforeach --}}
-                                {{ $resep->name }}
+                                </td>
+                                <td>
+                                    {{ $resep->id ?? '' }}
+                                </td>
+                                <td>
+                                    {{-- @foreach($resep->users as $key => $item)
+                                        {{ $item->name }}
+                                    @endforeach --}}
+                                    {{ $resep->name }}
 
-                            </td>
-                            <td>
-                                {{ $resep->nama_resep ?? '' }}
-                            </td>
-                            <td>
-                                <img class="img-fluid" src="{{ asset('images/'.$resep->gambar) }}" height="100" width="150">
-                            </td>
-                            <td>
-                                {{-- {!! nl2br($resep->alat_bahan) !!} --}}
-                                {!! Str::limit($resep->alat_bahan, 10) !!}
-                            </td>
-                            <td>
-                                {!! Str::limit($resep->step, 10) !!}
-                            </td>
-                            <td>
-                                @foreach($resep->kategori as $key => $item)
-                                    <span class="badge blue">{{ $item->nama_kategori }}</span>
-                                @endforeach
-                            </td>
-                            <td>
-                                @can('resep_show')
-                                    <a class="btn-sm btn-indigo" href="{{ route('admin.reseps.show', $resep->id) }}">
-                                        {{ trans('global.view') }}
-                                    </a>
-                                @endcan
+                                </td>
+                                <td>
+                                    {{ $resep->nama_resep ?? '' }}
+                                </td>
+                                <td>
+                                    {!! Str::of($resep->description)->words(10, ' ....') !!}
+                                </td>
+                                <td>
+                                    <img class="img-fluid" src="{{ asset('images/'.$resep->gambar) }}" height="100" width="150">
+                                </td>
+                                <td>
+                                    {{-- {!! nl2br($resep->alat_bahan) !!} --}}
+                                    {!! Str::of($resep->alat_bahan)->words(5, ' ....') !!}
+                                </td>
+                                <td>
+                                    {!! Str::of($resep->step)->words(5, ' ....') !!}
+                                </td>
+                                <td>
+                                    @foreach($resep->kategori as $key => $item)
+                                        <span class="badge blue">{{ $item->nama_kategori }}</span>
+                                    @endforeach
+                                </td>
+                                <td>
+                                    @can('resep_show')
+                                        <a class="btn-sm btn-indigo" href="{{ route('admin.reseps.show', $resep->id) }}">
+                                            {{ trans('global.view') }}
+                                        </a>
+                                    @endcan
 
-                                @can('resep_edit')
-                                    <a class="btn-sm btn-blue" href="{{ route('admin.reseps.edit', $resep->id) }}">
-                                        {{ trans('global.edit') }}
-                                    </a>
-                                @endcan
+                                    @can('resep_edit')
+                                        <a class="btn-sm btn-blue" href="{{ route('admin.reseps.edit', $resep->id) }}">
+                                            {{ trans('global.edit') }}
+                                        </a>
+                                    @endcan
 
-                                @can('resep_delete')
-                                    <form action="{{ route('admin.reseps.destroy', $resep->id) }}" method="POST" onsubmit="return confirm('{{ trans('global.areYouSure') }}');" style="display: inline-block;">
-                                        <input type="hidden" name="_method" value="DELETE">
-                                        <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                                        <input type="submit" class="btn-sm btn-red" value="{{ trans('global.delete') }}">
-                                    </form>
-                                @endcan
+                                    @can('resep_delete')
+                                        <form action="{{ route('admin.reseps.destroy', $resep->id) }}" method="POST" onsubmit="return confirm('{{ trans('global.areYouSure') }}');" style="display: inline-block;">
+                                            <input type="hidden" name="_method" value="DELETE">
+                                            <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                            <input type="submit" class="btn-sm btn-red" value="{{ trans('global.delete') }}">
+                                        </form>
+                                    @endcan
 
-                            </td>
+                                </td>
 
-                        </tr>
-                    @endforeach
+                            </tr>
+                        @endforeach
+                    @endcan
+
+                    @can('resep_admin_access')
+                        @foreach($data_resep as $key => $resep)
+                            <tr data-entry-id="{{ $resep->id }}">
+                                <td>
+
+                                </td>
+                                <td>
+                                    {{ $resep->id ?? '' }}
+                                </td>
+                                <td>
+                                    {{-- @foreach($resep->users as $key => $item)
+                                        {{ $item->name }}
+                                    @endforeach --}}
+                                    {{ $resep->name }}
+
+                                </td>
+                                <td>
+                                    {{ $resep->nama_resep ?? '' }}
+                                </td>
+                                <td>
+                                    {!! Str::of($resep->description)->words(10, ' ....') !!}
+                                </td>
+                                <td>
+                                    <img class="img-fluid" src="{{ asset('images/'.$resep->gambar) }}" height="100" width="150">
+                                </td>
+                                <td>
+                                    {{-- {!! nl2br($resep->alat_bahan) !!} --}}
+                                    {!! Str::of($resep->alat_bahan)->words(5, ' ....') !!}
+                                </td>
+                                <td>
+                                    {!! Str::of($resep->step)->words(5, ' ....') !!}
+                                </td>
+                                <td>
+                                    @foreach($resep->kategori as $key => $item)
+                                        <span class="badge blue">{{ $item->nama_kategori }}</span>
+                                    @endforeach
+                                </td>
+                                <td>
+                                    @can('resep_show')
+                                        <a class="btn-sm btn-indigo" href="{{ route('admin.reseps.show', $resep->id) }}">
+                                            {{ trans('global.view') }}
+                                        </a>
+                                    @endcan
+
+                                    @can('resep_edit')
+                                        <a class="btn-sm btn-blue" href="{{ route('admin.reseps.edit', $resep->id) }}">
+                                            {{ trans('global.edit') }}
+                                        </a>
+                                    @endcan
+
+                                    @can('resep_delete')
+                                        <form action="{{ route('admin.reseps.destroy', $resep->id) }}" method="POST" onsubmit="return confirm('{{ trans('global.areYouSure') }}');" style="display: inline-block;">
+                                            <input type="hidden" name="_method" value="DELETE">
+                                            <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                            <input type="submit" class="btn-sm btn-red" value="{{ trans('global.delete') }}">
+                                        </form>
+                                    @endcan
+
+                                </td>
+
+                            </tr>
+                        @endforeach
+                    @endcan
+
                 </tbody>
             </table>
         </div>

@@ -42,6 +42,14 @@
                 </tr>
                 <tr>
                     <th>
+                        Description
+                    </th>
+                    <td>
+                        {{ $resep->description }}
+                    </td>
+                </tr>
+                <tr>
+                    <th>
                         {{ trans('cruds.resep.fields.gambar') }}
                     </th>
                     <td>

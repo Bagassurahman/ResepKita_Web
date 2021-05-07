@@ -21,6 +21,7 @@ class Resep extends Model
     protected $fillable = [
         'nama_resep',
         'name',
+        'description',
         'gambar',
         'alat_bahan',
         'step',

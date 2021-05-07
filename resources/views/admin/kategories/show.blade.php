@@ -2,82 +2,65 @@
 @section('content')
 <div class="main-card">
     <div class="header">
-        {{ trans('global.show') }} {{ trans('cruds.resep.title') }}
+        {{ trans('global.show') }} {{ trans('cruds.kategori.title') }}
     </div>
 
     <div class="body">
         <div class="block pb-4">
-            <a class="btn-md btn-gray" href="{{ route('admin.reseps.index') }}">
+            <a class="btn-md btn-gray" href="{{ route('admin.kategories.index') }}">
                 {{ trans('global.back_to_list') }}
             </a>
         </div>
         <table class="striped bordered show-table">
+
             <tbody>
+                {{-- @foreach ($kategori as $key => $kategori) --}}
                 <tr>
                     <th>
-                        {{ trans('cruds.resep.fields.id') }}
+                        {{ trans('cruds.kategori.fields.id') }}
                     </th>
                     <td>
-                        {{ $resep->id }}
+                        {{ $kategori->id }}
                     </td>
                 </tr>
                 <tr>
                     <th>
-                        {{ trans('cruds.resep.fields.users') }}
+                        {{ trans('cruds.kategori.fields.nama_kategori') }}
                     </th>
                     <td>
-                        {{-- @foreach($users as $id => $users)
-                            <span>{{ $users }}</span>
-                        @endforeach --}}
-                        {{ $resep->name }}
+                        {{ $kategori->nama_kategori }}
                     </td>
                 </tr>
                 <tr>
                     <th>
-                        {{ trans('cruds.resep.fields.nama_resep') }}
+                        {{ trans('cruds.kategori.fields.gambar_sampul') }}
                     </th>
                     <td>
-                        {{ $resep->nama_resep }}
+                        <img class="img-fluid" src="{{ asset('images/'.$kategori->gambar_sampul) }}" height="100" width="150">
                     </td>
                 </tr>
                 <tr>
                     <th>
-                        {{ trans('cruds.resep.fields.gambar') }}
+                        {{ trans('cruds.kategori.fields.slug') }}
                     </th>
                     <td>
-                        <img class="img-fluid" src="{{ asset('images/'.$resep->gambar) }}" height="100" width="150">
+                        {{ $kategori->slug }}
                     </td>
                 </tr>
                 <tr>
                     <th>
-                        {{ trans('cruds.resep.fields.alat_bahan') }}
+                        {{ trans('cruds.kategori.fields.keterangan') }}
                     </th>
                     <td>
-                        {{ $resep->alat_bahan }}
+                        {!! $kategori->keterangan !!}
                     </td>
                 </tr>
-                <tr>
-                    <th>
-                        {{ trans('cruds.resep.fields.step') }}
-                    </th>
-                    <td>
-                        {{ $resep->step }}
-                    </td>
-                </tr>
-                <tr>
-                    <th>
-                        {{ trans('cruds.resep.fields.kategori') }}
-                    </th>
-                    <td>
-                        @foreach($resep->kategori as $key => $kategories)
-                            <span class="label label-info">{{ $kategories->nama_kategori }}</span>
-                        @endforeach
-                    </td>
-                </tr>
+
+                {{-- @endforeach --}}
             </tbody>
         </table>
         <div class="block pt-4">
-            <a class="btn-md btn-gray" href="{{ route('admin.reseps.index') }}">
+            <a class="btn-md btn-gray" href="{{ route('admin.kategories.index') }}">
                 {{ trans('global.back_to_list') }}
             </a>
         </div>

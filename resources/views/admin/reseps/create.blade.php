@@ -40,6 +40,17 @@
                 @endif
             </div>
             <div class="mb-3">
+                <label for="description" class="text-xs required">Description</label>
+
+                <div class="form-group">
+                    {{-- <input type="text" id="name" name="nama_resep" class="{{ $errors->has('nama_resep') ? ' is-invalid' : '' }}" value="{{ old('nama_resep') }}" required> --}}
+                    <textarea id="summernote" name="description" class="{{ $errors->has('description') ? ' is-invalid' : '' }}" placeholder="Description" rows="10" required></textarea>
+                </div>
+                @if($errors->has('description'))
+                    <p class="invalid-feedback">{{ $errors->first('description') }}</p>
+                @endif
+            </div>
+            <div class="mb-3">
                 <label for="gambar" class="text-xs required">{{ trans('cruds.resep.fields.gambar') }}</label>
 
                 <div class="form-group">
@@ -54,7 +65,7 @@
 
                 <div class="form-group">
                     {{-- <input type="text" id="name" name="nama_resep" class="{{ $errors->has('nama_resep') ? ' is-invalid' : '' }}" value="{{ old('nama_resep') }}" required> --}}
-                    <textarea id="summernote" name="alat_bahan" class="{{ $errors->has('alat_bahan') ? ' is-invalid' : '' }}" placeholder="Alat dan bahan" rows="10" required></textarea>
+                    <textarea id="summernote_ab" name="alat_bahan" class="{{ $errors->has('alat_bahan') ? ' is-invalid' : '' }}" placeholder="Alat dan bahan" rows="10" required></textarea>
                 </div>
                 @if($errors->has('alat_bahan'))
                     <p class="invalid-feedback">{{ $errors->first('alat_bahan') }}</p>
@@ -95,6 +106,10 @@
 
     <script>
         $('#summernote').summernote({
+            tabsize: 2,
+            height: 200
+          });
+        $('#summernote_ab').summernote({
             tabsize: 2,
             height: 200
           });

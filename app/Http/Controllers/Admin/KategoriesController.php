@@ -10,6 +10,7 @@ use App\Http\Requests\UpdateKategoriRequest;
 use App\Resep;
 use App\User;
 use App\Kategori;
+use Illuminate\Support\Str;
 use Gate;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -38,11 +39,11 @@ class KategoriesController extends Controller
     {
         abort_if(Gate::denies('kategori_create'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        // $kategories = Kategori::all()->pluck('nama_kategori', 'id');
+        $kategories = Kategori::all();
         // $users = User::all()->pluck('name', 'id');
         // $gambar = Resep::all()->pluck('gambar', 'id')->prepend(trans('global.pleaseSelect'), '');
 
-        return view('admin.reseps.create', compact('kategories', 'users'));
+        return view('admin.kategories.create', compact('kategories'));
     }
 
     /**
@@ -55,11 +56,12 @@ class KategoriesController extends Controller
     {
         $imgName = $request->gambar_sampul->getClientOriginalName();
         $request->gambar_sampul->move(public_path('images'), $imgName);
+        $slug = Str::slug($request->nama_kategori);
 
         Kategori::create([
-            "nama_kategori"=>$request->input("nama_resep"),
+            "nama_kategori"=>$request->input("nama_kategori"),
             "gambar_sampul"=>$imgName,
-            "slug"=>$request->input("slug"),
+            "slug"=>$slug,
             "keterangan"=>$request->input("keterangan"),
         ]);
 
@@ -72,11 +74,10 @@ class KategoriesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Kategori $kategori)
+    public function show($id)
     {
         abort_if(Gate::denies('kategori_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
-
-        $kategori->load('kategori');
+        $kategori = Kategori::find($id);
 
         return view('admin.kategories.show', compact('kategori'));
     }
@@ -87,12 +88,11 @@ class KategoriesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Kategori $kategori)
+    public function edit($id)
     {
         abort_if(Gate::denies('kategori_edit'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $kategori = Kategori::all();
-        $kategori->load('kategori');
+        $kategori = Kategori::find($id);
 
         return view('admin.kategories.edit', compact('kategori'));
     }
@@ -104,11 +104,13 @@ class KategoriesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateKategoriRequest $request, Kategori $kategori)
+    public function update(UpdateKategoriRequest $request, Kategori $kategori, $id)
     {
 
+        $kategori = Kategori::find($id);
+        $slug = Str::slug($request->nama_kategori);
         $kategori->nama_kategori = $request->input("nama_kategori");
-        $kategori->slug = $request->input("slug");
+        $kategori->slug = $slug;
         $kategori->keterangan = $request->input("keterangan");
 
 
@@ -131,10 +133,11 @@ class KategoriesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Kategori $kategori)
+    public function destroy(Kategori $kategori, $id)
     {
         abort_if(Gate::denies('kategori_delete'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
+        $kategori = Kategori::find($id);
         $kategori->delete();
 
         return back();

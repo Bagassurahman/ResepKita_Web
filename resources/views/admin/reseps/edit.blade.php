@@ -42,6 +42,17 @@
                 @endif
             </div>
             <div class="mb-3">
+                <label for="description" class="text-xs required">Description</label>
+
+                <div class="form-group">
+                    {{-- <input type="text" id="name" name="nama_resep" class="{{ $errors->has('nama_resep') ? ' is-invalid' : '' }}" value="{{ old('nama_resep') }}" required> --}}
+                    <textarea id="summernote" class="description" name="description" class="{{ $errors->has('description') ? ' is-invalid' : '' }}" placeholder="Alat dan bahan" rows="10" required>{{ $resep->description }}</textarea>
+                </div>
+                @if($errors->has('description'))
+                    <p class="invalid-feedback">{{ $errors->first('description') }}</p>
+                @endif
+            </div>
+            <div class="mb-3">
                 <label for="gambar" class="text-xs required">{{ trans('cruds.resep.fields.gambar') }}</label>
                 @if ($resep->gambar)
                     <img id="gambar" src="{{ asset('images/'.$resep->gambar) }}" height="100" width="150"><br>
@@ -58,7 +69,7 @@
 
                 <div class="form-group">
                     {{-- <input type="text" id="name" name="nama_resep" class="{{ $errors->has('nama_resep') ? ' is-invalid' : '' }}" value="{{ old('nama_resep') }}" required> --}}
-                    <textarea id="summernote" class="alat_bahan" name="alat_bahan" class="{{ $errors->has('alat_bahan') ? ' is-invalid' : '' }}" placeholder="Alat dan bahan" rows="10" required>{{ $resep->alat_bahan }}</textarea>
+                    <textarea id="summernote_ab" class="alat_bahan" name="alat_bahan" class="{{ $errors->has('alat_bahan') ? ' is-invalid' : '' }}" placeholder="Alat dan bahan" rows="10" required>{{ $resep->alat_bahan }}</textarea>
                 </div>
                 @if($errors->has('alat_bahan'))
                     <p class="invalid-feedback">{{ $errors->first('alat_bahan') }}</p>
@@ -115,6 +126,10 @@
 
     <script>
         $('#summernote').summernote({
+            tabsize: 2,
+            height: 200
+          });
+        $('#summernote_ab').summernote({
             tabsize: 2,
             height: 200
           });

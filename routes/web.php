@@ -1,8 +1,14 @@
 <?php
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 
 // Route::redirect('/', '/login');
 Route::get('/', 'LandingController@index');
+Route::get('/resep', 'LandingController@resep');
+Route::get('/resep_detail/{id}', 'LandingController@show');
+Route::get('/contact', 'LandingController@contact');
+Route::post('/contact', 'LandingController@store');
+// Route::resource('/', 'LandingController');
 Route::get('/home', function () {
     if (session('status')) {
         return redirect()->route('admin.home')->with('status', session('status'));
@@ -46,6 +52,11 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
     // Kategori
     Route::delete('kategories/destroy', 'KategoriesController@massDestroy')->name('kategories.massDestroy');
     Route::resource('kategories', 'KategoriesController');
+
+    // Contact
+    Route::delete('contacts/destroy', 'ContactsController@massDestroy')->name('contacts.massDestroy');
+    Route::resource('contacts', 'ContactsController');
+    Route::put('contacts/update/{id}', 'ContactsController@update')->name('contacts.update');
 });
 Route::group(['prefix' => 'profile', 'as' => 'profile.', 'namespace' => 'Auth', 'middleware' => ['auth']], function () {
 // Change password
