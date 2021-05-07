@@ -16,8 +16,8 @@ class LandingController extends Controller
     public function index()
     {
 
-        // $reseps = Resep::limit(6)->get();
-        return view('welcome');
+        $reseps = Resep::all()->take(6);
+        return view('welcome', compact('reseps'));
     }
     public function resep()
     {
